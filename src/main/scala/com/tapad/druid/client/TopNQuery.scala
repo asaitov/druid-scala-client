@@ -19,7 +19,7 @@ case class TopNQuery(source: String,
     JObject(
       "queryType" -> "topN",
       "dataSource" -> source,
-      "granularity" -> granularity.name,
+      "granularity" -> granularity.toJson,
       "dimension" -> dimension,
       "threshold" -> threshold,
       "metric" -> metric,

@@ -16,7 +16,7 @@ case class TimeSeriesQuery(source: String,
     JObject(
       "queryType" -> "timeseries",
       "dataSource" -> source,
-      "granularity" -> granularity.name,
+      "granularity" -> granularity.toJson,
       "aggregations" -> aggregate.map(_.toJson),
       "postAggregations" -> postAggregate.map(_.toJson),
       "intervals" -> Time.intervalToString(interval),

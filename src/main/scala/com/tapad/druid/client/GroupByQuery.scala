@@ -17,7 +17,7 @@ case class GroupByQuery(source: String,
     JObject(
       "queryType" -> "groupBy",
       "dataSource" -> source,
-      "granularity" -> granularity.name,
+      "granularity" -> granularity.toJson,
       "dimensions" -> dimensions,
       "aggregations" -> aggregate.map(_.toJson),
       "postAggregations" -> postAggregate.map(_.toJson),
