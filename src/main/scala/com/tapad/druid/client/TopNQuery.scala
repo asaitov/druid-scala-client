@@ -47,7 +47,7 @@ object TopNResponse {
         }
         TopNResponse(data)
       case err @ _ =>
-        throw new IllegalArgumentException("Invalid top N response: " + err)
+        throw new IllegalArgumentException("Invalid top N response:\n" + org.json4s.jackson.prettyJson(err))
     }
   }
 }

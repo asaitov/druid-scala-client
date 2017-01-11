@@ -39,7 +39,7 @@ object GroupByResponse {
         }
         GroupByResponse(data)
       case err @ _ =>
-        throw new IllegalArgumentException("Invalid time series response: " + err)
+        throw new IllegalArgumentException("Invalid time series response:\n" + org.json4s.jackson.prettyJson(err))
     }
   }
 }
