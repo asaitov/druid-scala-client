@@ -60,5 +60,7 @@ case class DruidClient(serverUrl: String)(implicit val executionContext: Executi
     }
   }
 
+  def close() = client.close()
+
 }
 
