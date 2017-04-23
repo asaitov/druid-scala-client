@@ -4,10 +4,11 @@ import org.json4s._
 import org.json4s.jackson._
 import org.json4s.jackson.JsonMethods._
 import com.ning.http.client._
+import com.typesafe.scalalogging.StrictLogging
 
 import scala.concurrent.{ExecutionContext, Promise, Future}
 
-case class DruidClient(serverUrl: String)(implicit val executionContext: ExecutionContext) {
+case class DruidClient(serverUrl: String)(implicit val executionContext: ExecutionContext) extends StrictLogging {
   private val config = new AsyncHttpClientConfig.Builder()
   private val client = new AsyncHttpClient(config.build())
   private val url = s"$serverUrl/druid/v2/?pretty"
@@ -20,12 +21,16 @@ case class DruidClient(serverUrl: String)(implicit val executionContext: Executi
 
   private def parseJson(resp: Response): JValue = {
     val body = resp.getResponseBody("UTF-8")
+    logger.trace(body.toString)
     parse(body)
   }
 
   private def execute[R](js: JValue, parser: JValue => R) : Future[R] = {
+    logger.debug(js.toString)
+
     val p = Promise[Response]
     val body = compactJson(js)
+
     JsonPost(body).execute(new AsyncCompletionHandler[Response] {
       override def onCompleted(response: Response): Response = {
         p.success(response)
