@@ -26,10 +26,10 @@ case class DruidClient(serverUrl: String)(implicit val executionContext: Executi
   }
 
   private def execute[R](js: JValue, parser: JValue => R) : Future[R] = {
-    logger.debug(js.toString)
-
     val p = Promise[Response]
     val body = compactJson(js)
+
+    logger.debug(body.toString)
 
     JsonPost(body).execute(new AsyncCompletionHandler[Response] {
       override def onCompleted(response: Response): Response = {
