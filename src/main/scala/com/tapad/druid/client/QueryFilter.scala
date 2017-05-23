@@ -35,7 +35,7 @@ case class Not(filter: Expression) extends QueryFilter {
 
   def toJson: JValue = JObject(
     "type" -> "not",
-    "fields" -> filter.toJson
+    "field" -> filter.toJson
   )
 }
 case class ExprQueryFilter(typeName: String, dimension: String, value: String) extends QueryFilter {
