@@ -9,6 +9,7 @@ crossScalaVersions := Seq(scalaVersion.value, "2.12.3")
 
 licenses += ("Apache-2.0", url("http://opensource.org/licenses/Apache-2.0"))
 bintrayOrganization := Some("tabmo")
+releaseCrossBuild := true
 
 libraryDependencies ++= Seq(
   "org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.5",
